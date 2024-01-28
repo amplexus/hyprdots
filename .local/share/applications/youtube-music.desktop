@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Application
+Icon=youtube-music
+StartupWMClass=youtube-music
+X-DocPath=youtube-music/index.html
+Comment=Play and organize your music collection
+Keywords=Audio;Song;MP3;CD;Podcast;MTP;iPod;Playlist;Last.fm;UPnP;DLNA;Radio;
+MimeType=application/x-audio;
+Categories=AudioVideo;Audio;Player;
+Exec=youtube-music
+InitialPreference=99
+Name=YoutubeMusic
+GenericName=Music Player
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application

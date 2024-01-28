@@ -1,0 +1,17 @@
+[Desktop Entry]
+Categories=AudioVideo;Audio;AudioVideoEditing;
+Comment=Record and edit audio files
+Exec=env UBUNTU_MENUPROXY=0 GDK_BACKEND=x11 audacity %F
+GenericName=Sound Editor
+Icon=audacity
+Keywords=audio;sound;alsa;jack;editor;
+MimeType=application/x-audacity-project;audio/aac;audio/ac3;audio/mp4;audio/x-ms-wma;video/mpeg;audio/flac;audio/x-flac;audio/mpeg;audio/basic;audio/x-aiff;audio/x-wav;application/ogg;audio/x-vorbis+ogg
+Name=Audacity
+NoDisplay=false
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

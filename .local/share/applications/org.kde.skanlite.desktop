@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Application
+Exec=skanlite
+Icon=org.kde.skanlite
+X-DocPath=skanlite/index.html
+Terminal=false
+Name=Skanlite Big
+Name[en_GB]=Skanlite
+Name[eo]=Skanlite
+Name[x-test]=xxSkanlitexx
+GenericName=Image Scanning Application
+GenericName[en_GB]=Image Scanning Application
+GenericName[x-test]=xxImage Scanning Applicationxx
+Comment=Scan and save images
+Comment[en_GB]=Scan and save images
+Comment[x-test]=xxScan and save imagesxx
+Categories=Qt;KDE;Graphics;Scanning;
+X-DBUS-ServiceName=org.kde.skanlite
+StartupWMClass=skanlite

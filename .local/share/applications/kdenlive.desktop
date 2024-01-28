@@ -1,0 +1,24 @@
+[Desktop Entry]
+Type=Application
+Icon=kdenlive
+StartupWMClass=kdenlive
+X-DocPath=kdenlive/index.html
+MimeType=application/x-kdenlive;
+Categories=Qt;KDE;AudioVideo;AudioVideoEditing;
+Comment=
+Exec=kdenlive %F
+GenericName=Video Editing
+Icon=kdenlive
+InitialPreference=99
+Name=Kdenlive
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-ExtraNativeMimeTypes=
+X-KDE-NativeMimeType=application/x-kdenlive
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+X-DBUS-ServiceName=org.kde.kdenlive

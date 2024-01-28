@@ -1,0 +1,24 @@
+[Desktop Entry]
+Categories=Development;IDE;
+Comment[en_AU]=Android Studio
+Comment=Android Studio
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/android-studio_android-studio.desktop /snap/bin/android-studio %f
+GenericName[en_AU]=
+GenericName=
+Icon=android-studio
+MimeType=
+Name[en_AU]=Android Studio
+Name=Android Studio
+Path=
+StartupNotify=true
+StartupWMClass=jetbrains-studio
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-RunOnDiscreteGpu=false
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+X-SnapInstanceName=android-studio

@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=AudioVideo;Audio;Midi;Sequencer;X-SuSE-Sequencer;X-Red-Hat-Base;
+Comment=MIDI and Audio Sequencer and Notation Editor
+Exec=rosegarden %f
+GenericName=Sequencer and Notation Editor
+Icon=rosegarden
+Keywords=midi audio sequencer music notation score
+MimeType=audio/x-rosegarden-composition;audio/x-rosegarden-device;audio/x-rosegarden-project;audio/x-rosegarden-template;audio/midi;
+Name=Rosegarden
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-NativeMimeType=audio/x-rosegarden-composition
+X-KDE-SubstituteUID=false
+X-KDE-Username=

@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Qt;Utility;
+Comment=
+Exec=/usr/share/FlashPrint5/FlashPrint
+GenericName=FlashPrint5
+Icon=flashforge5
+MimeType=text/plain;
+Name=FlashForge 3D Printer Control Software v5
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-HasTempFileOption=true
+X-KDE-StartupNotify=true
+X-KDE-SubstituteUID=false
+X-KDE-Username=

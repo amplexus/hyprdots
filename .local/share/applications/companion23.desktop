@@ -1,0 +1,22 @@
+[Desktop Entry]
+Categories=Application
+Comment[en_AU]=The Ultimate Transmitter Companion
+Comment=The Ultimate Transmitter Companion
+Encoding=UTF-8
+Exec=companion23
+GenericName[en_AU]=Transmitter Companion App
+GenericName=Transmitter Companion App
+Icon=companion23
+MimeType=
+Name[en_AU]=Companion 2.3.15-otx
+Name=Companion 2.3.15-otx
+NoDisplay=false
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

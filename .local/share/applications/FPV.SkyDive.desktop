@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=FPV.SkyDive
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/1278060
+Icon=steam
+Terminal=false
+Type=Application
+Categories=Game;

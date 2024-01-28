@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Qt;KDE;Graphics;2DGraphics;RasterGraphics;
+Comment=Digital Painting
+Exec=krita %F
+GenericName=Digital Painting
+Icon=krita
+InitialPreference=99
+MimeType=application/x-krita;image/openraster;application/x-krita-paintoppreset;
+Name=Krita
+NoDisplay=false
+Path=
+StartupNotify=true
+StartupWMClass=krita
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-ExtraNativeMimeTypes=
+X-KDE-NativeMimeType=application/x-krita
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+X-Krita-Version=28

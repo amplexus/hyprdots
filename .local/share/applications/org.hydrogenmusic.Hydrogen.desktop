@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=AudioVideo;Audio;Qt;
+Comment=Create drum sequences
+Exec=hydrogen %F
+GenericName=Drum Machine
+Icon=org.hydrogenmusic.Hydrogen
+Keywords=audio;sound;jackd;sampler;drum;
+MimeType=text/xml;
+Name=Hydrogen
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+TryExec=hydrogen
+Type=Application
+Version=1.0
+X-KDE-SubstituteUID=false
+X-KDE-Username=
