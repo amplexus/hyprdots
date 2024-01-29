@@ -49,18 +49,18 @@ window#waybar {
 #workspaces {
     margin: 5px 1px 6px 1px;
     padding: 0px 1px;
-    border-radius: 15px;
+    border-radius: 0.5rem;
     border: 0px;
     font-weight: bold;
     font-style: normal;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: @textcolor1;
 }
 
 #workspaces button {
     padding: 0px 5px;
     margin: 4px 3px;
-    border-radius: 15px;
+    border-radius: 1rem;
     border: 0px;
     color: @textcolor3;
     transition: all 0.3s ease-in-out;
@@ -70,7 +70,7 @@ window#waybar {
     color: @textcolor1;
     background: @workspacesbackground2;
     border-radius: 15px;
-    min-width: 40px;
+    min-width: 2.5rem;
     transition: all 0.3s ease-in-out;
 }
 
@@ -85,10 +85,10 @@ window#waybar {
  * ----------------------------------------------------- */
 
 tooltip {
-    border-radius: 10px;
+    border-radius: 0.5rem;
     background-color: @backgroundlight;
     opacity:0.8;
-    padding:20px;
+    padding:1.25rem;
     margin:0px;
 }
 
@@ -102,11 +102,11 @@ tooltip label {
 
 #window {
     background: @backgroundlight;
-    margin: 10px 15px 10px 0px;
-    padding: 2px 10px 0px 10px;
-    border-radius: 12px;
+    margin: 0.5rem 0.75rem 0.5rem 0px;
+    padding: 0.05rem 0.75rem 0px 0.5rem;
+    border-radius: 0.5rem;
     color:@textcolor2;
-    font-size:16px;
+    font-size: 1.1rem;
     font-weight:normal;
 }
 
@@ -120,18 +120,18 @@ window#waybar.empty #window {
 
 #taskbar {
     background: @backgroundlight;
-    margin: 6px 15px 6px 0px;
+    margin: 0.2rem 1rem 0.2rem 0px;
     padding:0px;
-    border-radius: 15px;
+    border-radius: 1rem;
     font-weight: normal;
     font-style: normal;
-    border: 3px solid @backgroundlight;
+    border: 0.1rem solid @backgroundlight;
 }
 
 #taskbar button {
     margin:0;
-    border-radius: 15px;
-    padding: 0px 5px 0px 5px;
+    border-radius: 1rem;
+    padding: 0px 0.3rem 0px 0.3rem;
 }
 
 /* -----------------------------------------------------
@@ -165,14 +165,14 @@ window#waybar.empty #window {
  #custom-wallpaper, 
  #custom-system,
  #custom-waybarthemes {
-     margin-right: 23px;
-     font-size: 20px;
+     margin-right: 1.5rem;
+     font-size: 1.5rem;
      font-weight: bold;
      color: @iconcolor;
  }
  
  #custom-waybarthemes,#custom-system {
-     margin-right:15px;
+     margin-right: 1rem;
  }
 
 /* -----------------------------------------------------
@@ -181,11 +181,11 @@ window#waybar.empty #window {
 
 #custom-appmenu {
     background-color: @backgrounddark;
-    font-size: 16px;
+    font-size: 1.5rem;
     color: @textcolor1;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 10px;
+    border-radius: 1rem;
+    padding: 0.2rem 0.6rem 0px 0.8rem;
+    margin: 0.6rem 1rem 0.6rem 0.6rem;
 }
 
 /* -----------------------------------------------------
@@ -193,9 +193,9 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #custom-exit {
-    margin: 0px 20px 0px 0px;
+    margin: 0px 1.5rem 0px 0px;
     padding:0px;
-    font-size:20px;
+    font-size: 1.5rem;
     color: @iconcolor;
 }
 
@@ -205,11 +205,11 @@ window#waybar.empty #window {
 
 #custom-updates {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1rem;
     color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem 0px 0.5rem;
+    margin: 0.5rem 1rem 0.5rem 0px;
 }
 
 #custom-updates.green {
@@ -232,11 +232,11 @@ window#waybar.empty #window {
 
 #custom-youtube {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1rem;
     color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 0.6rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 /* -----------------------------------------------------
@@ -246,12 +246,12 @@ window#waybar.empty #window {
  #disk,#memory,#cpu,#language {
     margin:0px;
     padding:0px;
-    font-size:16px;
+    font-size: 1rem;
     color:@iconcolor;
 }
 
 #language {
-    margin-right:10px;
+    margin-right: 0.6rem;
 }
 
 /* -----------------------------------------------------
@@ -260,11 +260,11 @@ window#waybar.empty #window {
 
 #clock {
     background-color: @backgrounddark;
-    font-size: 16px;
+    font-size: 1rem;
     color: @textcolor1;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 0.6rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 /* -----------------------------------------------------
@@ -273,11 +273,11 @@ window#waybar.empty #window {
 
 #pulseaudio {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 0.6rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 #pulseaudio.muted {
@@ -291,11 +291,11 @@ window#waybar.empty #window {
 
 #network {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 0.6rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 #network.ethernet {
@@ -314,11 +314,11 @@ window#waybar.empty #window {
 
  #bluetooth, #bluetooth.on, #bluetooth.connected {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: @textcolor2;
     border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    padding: 0.1rem 0.6rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 #bluetooth.off {
@@ -333,11 +333,11 @@ window#waybar.empty #window {
 
 #battery {
     background-color: @backgroundlight;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 15px 0px 10px;
-    margin: 10px 15px 10px 0px;
+    border-radius: 1rem;
+    padding: 0.1rem 1rem 0px 0.6rem;
+    margin: 0.6rem 1rem 0.6rem 0px;
 }
 
 #battery.charging, #battery.plugged {

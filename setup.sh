@@ -5,6 +5,9 @@ which git || sudo apt install git
 which curl || sudo apt install curl
 which lxappearance || sudo apt install lxappearance
 
+export PATH=$HOME/.local/bin:$HOME/.venv/bin:$PATH
+[ -d ~/.venv ] || python3 -m venv ~/.venv
+
 # RUST
 curl https://sh.rustup.rs -sSf| sh
 rustup default stable
@@ -31,7 +34,6 @@ sudo cp target/release/swww /usr/local/bin/
 cd ~/Work
 git clone https://github.com/dylanaraps/pywal
 cd pywal
-python3 -m venv ~/.venv
 ~/.venv/bin/pip3 install pywal
 
 # LIBDRM > 2.4.119
@@ -60,7 +62,6 @@ ninja -C build
 ninja -C build install
 
 # WAYBAR
-
 sudo apt install clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev
 
 cd ~/Work
