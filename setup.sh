@@ -14,6 +14,15 @@ rustup default stable
 
 mkdir -p ~/Work
 
+# CATCH2
+cd ~/Work
+git clone https://github.com/catchorg/Catch2 --recurse-submodules
+cd Catch2
+meson setup --reconfigure --prefix=/usr/local build
+ninja -C build
+ninja -C build install
+
+
 # SWAYLOCK WITH EFFECTS
 cd ~/Work
 git clone https://github.com/jirutka/swaylock-effects --recurse-submodules
@@ -57,6 +66,14 @@ ninja -C build install
 cd ~/Work
 git clone https://github.com/swaywm/swayidle
 cd swayidle
+meson setup --reconfigure --prefix=/usr/local build
+ninja -C build
+ninja -C build install
+
+# WLOGOUT
+cd ~/Work
+git clone https://github.com/swaywm/wlogout
+cd wlogout
 meson setup --reconfigure --prefix=/usr/local build
 ninja -C build
 ninja -C build install
