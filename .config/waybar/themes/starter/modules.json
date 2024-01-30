@@ -113,28 +113,28 @@
     // Outlook Launcher
     "custom/outlook": {
         "format": "",
-        "on-click": "$HOME/.config/scripts/browser.sh --app=https://outlook.office.com/mail/",
+        "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://outlook.office.com/mail/",
         "tooltip": false
     },
 
     // Teams Launcher
     "custom/teams": {
         "format": "",
-        "on-click": "$HOME/.config/scripts/browser.sh --app=https://teams.microsoft.com/go",
+        "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://teams.microsoft.com/go",
         "tooltip": false
     },
 
     // Browser Launcher
     "custom/browser": {
         "format": "",
-        "on-click": "$HOME/.config/scripts/browser.sh",
+        "on-click": "$HOME/.config/hypr/scripts/browser.sh",
         "tooltip": false
     },    
 
     // ChatGPT Launcher
     "custom/chatgpt": {
         "format": "",
-        "on-click": "$HOME/.config/scripts/browser.sh --app=https://chat.openai.com",
+        "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://chat.openai.com",
         "tooltip": false
     },
 
