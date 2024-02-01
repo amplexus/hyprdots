@@ -3,6 +3,9 @@
 export PATH=$PATH:~/.local/bin:~/.cargo/bin:~/.venv/bin
 which git || sudo apt install git
 which curl || sudo apt install curl
+which slurp || sudo apt install slurp
+which grim || sudo apt install grim
+which wl-clipboard || sudo apt install wl-clipboard
 which lxappearance || sudo apt install lxappearance
 
 export PATH=$HOME/.local/bin:$HOME/.venv/bin:$PATH
