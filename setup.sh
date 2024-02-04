@@ -7,6 +7,7 @@ which slurp || sudo apt install slurp
 which grim || sudo apt install grim
 which wl-clipboard || sudo apt install wl-clipboard
 which lxappearance || sudo apt install lxappearance
+which pactl || sudo apt install pulseaudio-utils
 
 export PATH=$HOME/.local/bin:$HOME/.venv/bin:$PATH
 [ -d ~/.venv ] || python3 -m venv ~/.venv
