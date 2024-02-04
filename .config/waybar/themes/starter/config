@@ -36,8 +36,7 @@
         "custom/wallpaper",
         // "wlr/taskbar",
         "group/quicklinks",
-        "hyprland/window",
-        "custom/starter"
+        "hyprland/window"
     ],
 
     // Modules Center
