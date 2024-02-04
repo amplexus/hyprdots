@@ -2,6 +2,8 @@
 
 rasi_file=~/.cache/current_wallpaper.rasi
 
+which wal || export PATH=$PATH:~/.venv/bin
+
 case $1 in
 
 "init")
@@ -55,7 +57,7 @@ esac
 # Load current pywal color scheme
 [ -f ~/.cache/wal/colors.sh ] && source ~/.cache/wal/colors.sh
 
-echo "Wallpaper: $wallpaper"
+echo "CRJ::Chosen Wallpaper: $wallpaper"
 
 # Write selected wallpaper into .cache files
 echo "* { current-image: url(\"$wallpaper\", height); }" >"$rasi_file"
