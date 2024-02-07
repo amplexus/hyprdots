@@ -11,6 +11,7 @@ killall -e xdg-desktop-portal-wlr
 killall -e xdg-desktop-portal-gtk
 killall -e xdg-desktop-portal
 
-/usr/local/lib/xdg-desktop-portal-hyprland &
+#/usr/local/lib/xdg-desktop-portal-hyprland &
+/usr/libexec/xdg-desktop-portal-gtk &
 sleep 2
 /usr/libexec/xdg-desktop-portal &
