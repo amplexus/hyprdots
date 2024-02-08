@@ -7,7 +7,7 @@ export PATH=$PATH:~/.local/bin:~/.cargo/bin:~/.venv/bin
 sudo apt install qttools5-dev-tools libsdbus-c++-dev git curl slurp grim wl_clipboard lxappearance pulseaudio-utils \
 	clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev \
 	libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev \
-	libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev
+	libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev
 
 # RUST
 which rustup || curl https://sh.rustup.rs -sSf | sh
@@ -29,6 +29,7 @@ cd ~/Work/swaylock-effects || exit 2
 meson setup --reconfigure --prefix=/usr/local build
 ninja -C build
 ninja -C build install
+sudo chmod +s /usr/local/bin/swaylock
 
 # SWWW
 git clone https://github.com/LGFae/swww ~/Work/swww
@@ -77,8 +78,14 @@ meson setup --reconfigure --prefix=/usr/local build
 ninja -C build
 ninja -C build install
 
-# XDG DESKTOP PORTAL HYPRLAND
+# Sway Notifications
+git clone https://github.com/ErikReider/SwayNotificationCenter ~/Work/SwayNotificationCenter
+cd ~/Work/SwayNotificationCenter || exit 2
+meson setup --reconfigure --prefix=/usr/local build
+ninja -C build
+ninja -C build install
 
+# XDG DESKTOP PORTAL HYPRLAND
 git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland ~/Work/xdg-desktop-portal-hyprland
 cd ~/Work/xdg-desktop-portal-hyprland/ || exit 2
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
