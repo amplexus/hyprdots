@@ -12,6 +12,7 @@
   outline: none;
   margin: 0;
   padding: 0px;
+  background: alpha(@color6, .8); /* THIS */
   /* BellotaText 13, Comfortaa 13, Jura 14, montserrat alternates 13 */
   font: 1em shantell sans;
 }
