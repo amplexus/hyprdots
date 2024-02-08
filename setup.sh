@@ -7,7 +7,7 @@ export PATH=$PATH:~/.local/bin:~/.cargo/bin:~/.venv/bin
 sudo apt install qttools5-dev-tools libsdbus-c++-dev git curl slurp grim wl_clipboard lxappearance pulseaudio-utils \
 	clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev \
 	libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev \
-	libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev
+	libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin
 
 # RUST
 which rustup || curl https://sh.rustup.rs -sSf | sh

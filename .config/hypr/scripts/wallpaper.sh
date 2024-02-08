@@ -23,7 +23,7 @@ case $1 in
 # Select wallpaper with rofi
 "select")
 
-	[ ! -f "$rasi_file" ] && echo "* { current-image: url(\"${wallpaper}\", height); }" > "$rasi_file"
+	[ ! -f "$rasi_file" ] && echo "* { current-image: url(\"${wallpaper}\", height); }" >"$rasi_file"
 	selected=$(find ~/.config/hypr/walls -type f -exec basename {} \; | sort -R | while read -r fname; do
 		echo -en "$fname\x00icon\x1f$HOME/.config/hypr/walls/${fname}\n"
 	done | rofi -dmenu -replace -config ~/.config/rofi/config-wallpaper.rasi)
@@ -40,13 +40,13 @@ case $1 in
 # Randomly select wallpaper
 *)
 	[ -f ~/.cache/current_wallpaper ] && wallpaper=$(cat ~/.cache/current_wallpaper)
-  echo "CRJ::Randomly selecting wallpaper to replace: $wallpaper"
-  newwallpaper=""
+	echo "CRJ::Randomly selecting wallpaper to replace: $wallpaper"
+	newwallpaper=""
 	while true; do
 		newwallpaper=$(find ~/.config/hypr/walls -type f | shuf -n 1)
 		[ "$newwallpaper" != "$wallpaper" ] && break
 	done
-  echo "CRJ::Replacing $wallpaper with randomly selected wallpaper: $newwallpaper"
+	echo "CRJ::Replacing $wallpaper with randomly selected wallpaper: $newwallpaper"
 	wallpaper="$newwallpaper"
 	echo "$wallpaper" >~/.cache/current_wallpaper
 	wal -q -i "$wallpaper"
@@ -75,10 +75,10 @@ swww img "$wallpaper" \
 	--transition-duration=0.7 \
 	--transition-pos "$(hyprctl cursorpos)"
 
-[ `which wpg` ] && wpg -i default ~/.cache/wal/colors.json
+[ $(which wpg) ] && wpg -i default ~/.cache/wal/colors.json
 
 # Send notification
 # sleep 1
-# notify-send "Colors and Wallpaper updated" "with image $wallpaper"
+notify-send "Colors and Wallpaper updated" "with image $wallpaper"
 
 echo "DONE!"
