@@ -77,8 +77,11 @@ swww img "$wallpaper" \
 
 [ $(which wpg) ] && wpg -i default ~/.cache/wal/colors.json
 
+# Reload swaync config
+swaync-client --reload-css
+
 # Send notification
-# sleep 1
+sleep 1
 notify-send "Colors and Wallpaper updated" "with image $wallpaper"
 
 echo "DONE!"

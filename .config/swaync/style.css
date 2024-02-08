@@ -1,0 +1,21 @@
+@import url("../../.cache/wal/colors-gtk.css");
+@import url("./styles/notifications.css");
+@import url("./styles/widgets.css");
+
+.control-center {
+  /* the background of the whole control center */
+  background: alpha(@background, 0.9); /* Not this */
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  opacity: 0.1;
+}
+
+/* Window behind control center and on all other monitors  */
+.blank-window {
+  background: alpha(@background, 0.25); /* Not this */
+}
