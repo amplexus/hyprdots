@@ -52,7 +52,6 @@
         "battery", 
         "network",
         "group/hardware",
-        "custom/cliphist",
         "clock",
         "custom/notifications",
         "custom/exit"
