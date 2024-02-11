@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=AudioVideo;Audio;AudioVideoEditing;
 Comment=Record and edit audio files
-Exec=env UBUNTU_MENUPROXY=0 GDK_BACKEND=x11 audacity %F
+Exec=env GDK_SCALE=1 UBUNTU_MENUPROXY=0 GDK_BACKEND=x11 audacity %F
 GenericName=Sound Editor
 Icon=audacity
 Keywords=audio;sound;alsa;jack;editor;

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=skanlite
+Exec=env QT_SCALE_FACTOR=1 skanlite
 Icon=org.kde.skanlite
 X-DocPath=skanlite/index.html
 Terminal=false

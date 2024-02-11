@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Qt;Utility;
 Comment=
-Exec=/usr/share/FlashPrint5/FlashPrint
+Exec=env QT_SCALE_FACTOR=1 /usr/share/FlashPrint5/FlashPrint
 GenericName=FlashPrint5
 Icon=flashforge5
 MimeType=text/plain;

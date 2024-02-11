@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=AudioVideo;Audio;Qt;
 Comment=Create drum sequences
-Exec=hydrogen %F
+Exec=env QT_SCALE_FACTOR=1 hydrogen %F
 GenericName=Drum Machine
 Icon=org.hydrogenmusic.Hydrogen
 Keywords=audio;sound;jackd;sampler;drum;

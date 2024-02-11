@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=AudioVideo;Recorder;
 Comment=Free and Open Source Streaming/Recording Software
-Exec=obs
+Exec=env QT_SCALE_FACTOR=1 obs
 GenericName=Streaming/Recording Software
 Icon=com.obsproject.Studio
 Name=OBS Studio

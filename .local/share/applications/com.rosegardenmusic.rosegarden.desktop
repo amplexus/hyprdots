@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=AudioVideo;Audio;Midi;Sequencer;X-SuSE-Sequencer;X-Red-Hat-Base;
 Comment=MIDI and Audio Sequencer and Notation Editor
-Exec=rosegarden %f
+Exec=env QT_SCALE_FACTOR=1 rosegarden %f
 GenericName=Sequencer and Notation Editor
 Icon=rosegarden
 Keywords=midi audio sequencer music notation score

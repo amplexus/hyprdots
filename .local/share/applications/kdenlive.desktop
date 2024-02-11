@@ -6,7 +6,7 @@ X-DocPath=kdenlive/index.html
 MimeType=application/x-kdenlive;
 Categories=Qt;KDE;AudioVideo;AudioVideoEditing;
 Comment=
-Exec=kdenlive %F
+Exec=env QT_SCALE_FACTOR=1 kdenlive %F
 GenericName=Video Editing
 Icon=kdenlive
 InitialPreference=99

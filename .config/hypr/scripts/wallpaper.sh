@@ -80,6 +80,10 @@ swww img "$wallpaper" \
 # Reload swaync config
 swaync-client --reload-css
 
+# GTK
+
+which wpg && wpg -s $(cat ~/.cache/current_wallpaper)
+
 # Send notification
 sleep 1
 notify-send "Colors and Wallpaper updated" "with image $wallpaper"

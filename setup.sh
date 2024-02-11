@@ -99,6 +99,8 @@ sudo cmake --install build
 git clone https://github.com/deviantfero/wpgtk ~/Work/wpgtk
 cd ~/Work/wpgtk || exit 2
 ~/.venv/bin/pip3 install .
+~/.venv/lib/python3.11/site-packages/wpgtk/misc/wpg-install.sh -gi
+echo "Now run nwg-look and select FlatColor theme and icons"
 
 # NWG LOOK
 git clone https://github.com/nwg-piotr/nwg-look ~/Work/nwg-look

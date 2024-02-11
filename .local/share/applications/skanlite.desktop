@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=Document scanner
-Exec=/usr/bin/skanlite
+Exec=env QT_SCALE_FACTOR=1 /usr/bin/skanlite
 Icon=skanlite-icon-small
 Name=SkanLite Big
 NoDisplay=false

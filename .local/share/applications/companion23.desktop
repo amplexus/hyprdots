@@ -3,7 +3,7 @@ Categories=Application
 Comment[en_AU]=The Ultimate Transmitter Companion
 Comment=The Ultimate Transmitter Companion
 Encoding=UTF-8
-Exec=companion23
+Exec=env QT_SCALE_FACTOR=1 companion23
 GenericName[en_AU]=Transmitter Companion App
 GenericName=Transmitter Companion App
 Icon=companion23
