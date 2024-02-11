@@ -44,7 +44,7 @@ cd ~/Work/pywal || exit 2
 ~/.venv/bin/pip3 install pywal
 
 # GTK PYWAL
-~/.venv/bin/pip3 install wpgtk gobject
+~/.venv/bin/pip3 install gobject pygobject
 
 # LIBDRM > 2.4.119
 git clone https://gitlab.freedesktop.org/mesa/drm.git ~/Work/drm
@@ -94,6 +94,16 @@ cd ~/Work/xdg-desktop-portal-hyprland/ || exit 2
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 cmake --build build
 sudo cmake --install build
+
+# WPGTK
+git clone https://github.com/deviantfero/wpgtk ~/Work/wpgtk
+cd ~/Work/wpgtk || exit 2
+~/.venv/bin/pip3 install .
+
+# NWG LOOK
+git clone https://github.com/nwg-piotr/nwg-look ~/Work/nwg-look
+cd ~/Work/nwg-look || exit 2
+make build && sudo make install
 
 # YOUTUBE MUSIC
 git clone https://github.com/th-ch/youtube-music ~/Work/youtube-music
