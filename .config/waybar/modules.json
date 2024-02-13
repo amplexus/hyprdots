@@ -107,7 +107,7 @@
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
+        "exec": "~/.config/hypr/scripts/swaync-client.sh",
         "on-click": "sh -c 'sleep 0.1s; swaync-client -t -sw; sleep 0.1s'",
         "on-click-right": "swaync-client -d -sw",
         "escape": true

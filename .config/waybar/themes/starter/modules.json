@@ -10,21 +10,20 @@
 //
 {
     // Workspaces
-    "hyprland/workspaces" : {
+    "hyprland/workspaces": {
         "on-click": "activate",
         "active-only": false,
         "all-outputs": true,
         "format": "{}",
         "format-icons": {
-			"urgent": "",
-			"active": "",
-			"default": ""
+            "urgent": "",
+            "active": "",
+            "default": ""
         },
         "persistent-workspaces": {
-             "*": 5
-        }       
+            "*": 5
+        }
     },
-
     // Taskbar
     "wlr/taskbar": {
         "format": "{icon}",
@@ -33,7 +32,7 @@
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-           "Alacritty"
+            "Alacritty"
         ],
         "app_ids-mapping": {
             "firefoxdeveloperedition": "firefox-developer-edition"
@@ -43,7 +42,6 @@
             "Foot Server": "Terminal"
         }
     },
-
     // Hyprland Window
     "hyprland/window": {
         "rewrite": {
@@ -55,25 +53,22 @@
         },
         "separate-outputs": true
     },
-
     // Updates Count
     "custom/updates": {
         "format": "  {}",
         "tooltip-format": "{}",
         "escape": true,
-        "return-type": "json",       
+        "return-type": "json",
         "exec": "~/.config/hypr/scripts/updates.sh --get-updates",
         "restart-interval": 60,
         "on-click": "kitty -e ~/.config/hypr/scripts/updates.sh --update-system",
         "tooltip": false
     },
-
     // Wallpaper
     "custom/starter": {
         "format": "THEME STARTER",
         "tooltip": false
     },
-    
     // Wallpaper
     "custom/wallpaper": {
         "format": "",
@@ -81,98 +76,86 @@
         "on-click-right": "~/.config/hypr/scripts/wallpaper.sh random",
         "tooltip": false
     },
-
     // Waybar Themes
     "custom/waybarthemes": {
         "format": "",
         "on-click": "~/.config/waybar/themeswitcher.sh",
         "tooltip": false
     },
-    
     // Sway Notifications
     "custom/notifications": {
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-          "notification": "<span foreground='red'><sup></sup></span>",
-          "none": "",
-          "dnd-notification": "<span foreground='red'><sup></sup></span>",
-          "dnd-none": "",
-          "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-          "inhibited-none": "",
-          "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-          "dnd-inhibited-none": ""
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
         },
         "return-type": "json",
-        "exec": "swaync-client -swb",
+        "exec": "~/.config/hypr/scripts/swaync-client.sh",
         "on-click": "sh -c 'sleep 0.1s; swaync-client -t -sw; sleep 0.1s'",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
     },
-    
     // Settings
     "custom/settings": {
         "format": "",
         "on-click": "kitty --class dotfiles-floating -e ~/.config/hypr/scripts/settings.sh",
         "tooltip": false
     },
-
     // Keybindings
     "custom/keybindings": {
         "format": "",
         "on-click": "~/.config/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
-
     // Filemanager Launcher
     "custom/filemanager": {
         "format": "",
         "on-click": "thunar",
         "tooltip": false
     },
-
     // Outlook Launcher
     "custom/outlook": {
         "format": "",
         "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://outlook.office.com/mail/",
         "tooltip": false
     },
-
     // Teams Launcher
     "custom/teams": {
         "format": "",
         "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://teams.microsoft.com/go",
         "tooltip": false
     },
-
     // Browser Launcher
     "custom/browser": {
         "format": "",
         "on-click": "$HOME/.config/hypr/scripts/browser.sh",
         "tooltip": false
-    },    
-
+    },
     // ChatGPT Launcher
     "custom/chatgpt": {
         "format": "",
         "on-click": "$HOME/.config/hypr/scripts/browser.sh --app=https://chat.openai.com",
         "tooltip": false
     },
-
     // Calculator
     "custom/calculator": {
         "format": "",
         "on-click": "qalculate-gtk",
         "tooltip": false
     },
-
     // Windows VM
     "custom/windowsvm": {
         "format": "",
         "on-click": "~/.config/hypr/scripts/launchvm.sh",
         "tooltip": false
     },
-
     // Rofi Application Launcher
     "custom/appmenu": {
         "format": " 󰫺󰫽󰫹󰫲󰬅󰬂󰬀",
@@ -180,14 +163,12 @@
         "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
-    
     // Power Menu
     "custom/exit": {
         "format": "",
         "on-click": "wlogout",
         "tooltip": false
     },
-
     // Keyboard State
     "keyboard-state": {
         "numlock": true,
@@ -198,50 +179,42 @@
             "unlocked": ""
         }
     },
-
     // System tray
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
-
     // Clock
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
-
     // System
     "custom/system": {
         "format": "",
         "tooltip": false
     },
-
     // CPU
     "cpu": {
         "format": "/ C {usage}% ",
         "on-click": "kitty -e htop"
     },
-
     // Memory
     "memory": {
         "format": "/ M {}% ",
         "on-click": "kitty -e htop"
     },
-
     // Harddisc space used
     "disk": {
         "interval": 30,
         "format": "D {percentage_used}% ",
         "path": "/",
         "on-click": "kitty -e htop"
-    }, 
-
+    },
     "hyprland/language": {
         "format": "/ K {short}"
     },
-
     // Group Hardware
     "group/hardware": {
         "orientation": "inherit",
@@ -249,7 +222,7 @@
             "transition-duration": 300,
             "children-class": "not-memory",
             "transition-left-to-right": false
-        },        
+        },
         "modules": [
             "custom/system",
             "disk",
@@ -258,7 +231,6 @@
             "hyprland/language"
         ]
     },
-    
     // Group Settings
     "group/settings": {
         "orientation": "inherit",
@@ -266,23 +238,21 @@
             "transition-duration": 300,
             "children-class": "not-memory",
             "transition-left-to-right": false
-        },        
+        },
         "modules": [
             "custom/settings",
             "custom/waybarthemes",
             "custom/wallpaper"
         ]
     },
-
     // Group Quicklinks
     "group/quicklinks": {
         "orientation": "horizontal",
         "modules": [
             "custom/filemanager",
             "custom/browser"
-         ]
+        ]
     },
-
     // Network
     "network": {
         "format": "{ifname}",
@@ -296,7 +266,6 @@
         "max-length": 50,
         "on-click": "nm-connection-editor"
     },
-
     // Battery
     "battery": {
         "states": {
@@ -310,9 +279,14 @@
         "format-alt": "{icon}  {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": [" ", " ", " ", " ", " "]
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
     },
-
     // Pulseaudio
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -329,11 +303,14 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", " ", " "]
+            "default": [
+                "",
+                " ",
+                " "
+            ]
         },
         "on-click": "pavucontrol"
     },
-
     // Bluetooth
     "bluetooth": {
         "format-disabled": "",
@@ -341,7 +318,6 @@
         "interval": 30,
         "on-click": "blueman-manager"
     },
-
     // Other
     "user": {
         "format": "{user}",
