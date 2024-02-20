@@ -13,7 +13,9 @@ function install_packages() {
 		clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev nodejs stow \
 		libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev ninja-build meson \
 		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev
-
+}
+function install_pnpm() {
+	which pnpm || curl -fsSL https://get.pnpm.io/install.sh | sh -
 }
 #
 function install_rust() {
@@ -99,6 +101,7 @@ function install_wlogout() {
 	[ -d ~/Work/wlogout ] || git clone https://github.com/swaywm/wlogout ~/Work/wlogout
 	cd ~/Work/wlogout || exit 2
 	git pull origin master --recurse-submodules
+	git checkout . # for some reason the build modifies version managed files...
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install
@@ -157,7 +160,8 @@ function install_yt_music() {
 	cd ~/Work/youtube-music || exit 2
 	git pull origin master --recurse-submodules
 	npm i --legacy-peer-deps && npm run build
-	sudo cp dist/*.AppImage /usr/local/bin/youtube-music
+	~/.local/share/pnpm/pnpm dist:linux
+	sudo cp pack/*.AppImage /usr/local/bin/youtube-music
 }
 
 set -e # exit on error
@@ -176,7 +180,7 @@ install_swayidle
 install_wlogout
 install_waybar
 install_swaync
-install_nwglook # PROBLEMS
+# install_nwglook # Ubuntu 24.10 installs go 1.21 by default, so I can't build nwg as it needs 1.22...
 install_wpgtk
 install_yt_music
 
