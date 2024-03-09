@@ -12,6 +12,7 @@
     // General Settings
 
     // Position TOP
+    "output": "eDP-1",
     "layer": "top",
     "margin-bottom": 0,
 
