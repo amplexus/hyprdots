@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+exec 2>&1 >~/.config/hypr/wallpaper.log
+
 rasi_file=~/.cache/current_wallpaper.rasi
 
 which wal || export PATH=$PATH:~/.venv/bin
@@ -8,15 +10,22 @@ case $1 in
 
 "init")
 	# Load wallpaper from .cache of last session
+	echo "Initialising..."
 	[ -f ~/.cache/current_wallpaper ] && wallpaper=$(cat ~/.cache/current_wallpaper)
 	# If not found or empty, set randomly
 	if [[ ! -f "$wallpaper" ]]; then
+		echo "Current wallpaper not found, selecting one at random"
 		wallpaper=$(find ~/.config/hypr/walls -type f | shuf -n 1)
 		# Cache file for holding the current wallpaper
 		echo "$wallpaper" >~/.cache/current_wallpaper
+		echo "Selected $wallpaper"
+	else
+		echo "Found and using current wallpaper $wallpaper"
 	fi
 	# Tell wal to use the wallpaper
-	wal -q -i "$wallpaper"
+	echo "Don't run pywal at startup as it crashes hyprland"
+	# wal -i "$wallpaper"
+	echo "Running wpg init script"
 	[ -f ~/.config/wpg/wp_init.sh ] && ~/.config/wpg/wp_init.sh
 	;;
 
@@ -34,7 +43,7 @@ case $1 in
 	wallpaper="$HOME/.config/hypr/walls/$selected"
 	echo "CRJ::Newly selected wallpaper: $wallpaper"
 	echo "$wallpaper" >~/.cache/current_wallpaper
-	wal -q -i "$wallpaper"
+	wal -i "$wallpaper"
 	;;
 
 # Randomly select wallpaper
@@ -75,10 +84,10 @@ swww img "$wallpaper" \
 	--transition-duration=0.7 \
 	--transition-pos "$(hyprctl cursorpos)"
 
-[ $(which wpg) ] && wpg -i default ~/.cache/wal/colors.json
+# [ $(which wpg) ] && wpg -i default ~/.cache/wal/colors.json
 
 # Reload swaync config
-swaync-client --reload-css
+# swaync-client --reload-css
 
 # GTK
 

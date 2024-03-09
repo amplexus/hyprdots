@@ -12,7 +12,7 @@ function install_packages() {
 	sudo apt install qttools5-dev-tools libsdbus-c++-dev git curl slurp grim lxappearance pulseaudio-utils udiskie wl-clipboard \
 		clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev nodejs stow \
 		libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev ninja-build meson \
-		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev
+		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev liblz4-dev
 }
 function install_pnpm() {
 	which pnpm || curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -31,7 +31,7 @@ function install_catch2() {
 	git pull origin devel --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 }
 
 # SWAYLOCK WITH EFFECTS
@@ -41,7 +41,7 @@ function install_swaylock() {
 	git pull origin master --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 	sudo chmod +s /usr/local/bin/swaylock
 }
 
@@ -54,6 +54,13 @@ function install_swww() {
 	[ -f /usr/local/bin/swww-daemon ] && sudo mv /usr/local/bin/swww-daemon /usr/local/bin/swww-daemon.old
 	sudo cp target/release/swww-daemon /usr/local/bin/
 	sudo cp target/release/swww /usr/local/bin/
+}
+
+# INSTALL GO
+function install_go() {
+	curl https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
+	sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+	export PATH=/usr/local/go/bin:$PATH
 }
 
 function install_pywal() {
@@ -74,16 +81,47 @@ function install_libdrm() {
 	git pull origin main --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
+}
+
+# HYPRLANG
+function install_hyprlang() {
+	[ -d ~/Work/hyprlang ] || git clone --recursive https://github.com/hyprwm/hyprlang ~/Work/hyprlang
+	cd ~/Work/hyprlang/ || exit 2
+	git pull origin main --recurse-submodules
+	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
+	cmake --build build
+	sudo cmake --install build
+}
+
+# WAYLAND UTILS
+function install_wayland_utils() {
+	[ -d ~/Work/wayland-utils ] || git clone https://gitlab.freedesktop.org/wayland/wayland-utils.git ~/Work/wayland-utils
+	cd ~/Work/wayland-utils || exit 2
+	git pull origin main --recurse-submodules
+	meson setup --reconfigure --prefix=/usr/local build
+	ninja -C build
+	ninja -C build install --quiet
+}
+
+# WAYLAND PROTOCOLS
+function install_wayland_protocols() {
+	[ -d ~/Work/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git ~/Work/wayland-protocols
+	cd ~/Work/wayland-protocols || exit 2
+	git pull origin main --recurse-submodules
+	meson setup --reconfigure --prefix=/usr/local build
+	ninja -C build
+	ninja -C build install --quiet
 }
 
 # HYPRLAND
 function install_hyprland() {
 	[ -d ~/Work/hyprland ] || git clone https://github.com/hyprwm/Hyprland --recurse-submodules ~/Work/hyprland/
-	cd ~/Work/Hyprland || exit 2
-	meson setup --reconfigure --prefix=/usr/local build
+	cd ~/Work/hyprland || exit 2
+	git pull origin main --recurse-submodules
+	meson setup --reconfigure --prefix=/usr/local build -Dbuildtype=debug
 	ninja -C build
-	ninja -C build install
+	sudo ninja -C build install --quiet
 }
 
 # SWAY IDLE
@@ -93,7 +131,7 @@ function install_swayidle() {
 	git pull origin master --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 }
 
 # WLOGOUT
@@ -104,7 +142,7 @@ function install_wlogout() {
 	git checkout . # for some reason the build modifies version managed files...
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 }
 
 # WAYBAR
@@ -114,7 +152,7 @@ function install_waybar() {
 	git pull origin master --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 }
 
 # Sway Notifications
@@ -124,7 +162,7 @@ function install_swaync() {
 	git pull origin main --recurse-submodules
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
-	ninja -C build install
+	ninja -C build install --quiet
 }
 
 # XDG DESKTOP PORTAL HYPRLAND
@@ -169,18 +207,22 @@ set -e # exit on error
 mkdir -p ~/Work # We will checkout source code for various projects here
 
 install_packages
+install_go # Ubuntu version is too old for nwg-look
 install_rust
 install_catch2
 install_libdrm
 install_swaylock
 install_swww
 install_pywal
+install_wayland_protocols # need newer version not available in apt
+install_wayland_utils     # keep in sync with wayland-protocols
+install_hyprlang
 install_hyprland
 install_swayidle
 install_wlogout
 install_waybar
 install_swaync
-# install_nwglook # Ubuntu 24.10 installs go 1.21 by default, so I can't build nwg as it needs 1.22...
+install_nwglook # nwg needs go 1.22...
 install_wpgtk
 install_yt_music
 
