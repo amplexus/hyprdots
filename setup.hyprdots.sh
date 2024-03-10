@@ -32,6 +32,7 @@ function install_catch2() {
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
 }
 
 # SWAYLOCK WITH EFFECTS
@@ -92,6 +93,7 @@ function install_hyprlang() {
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
 	sudo cmake --install build
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
 }
 
 # WAYLAND UTILS
@@ -122,6 +124,7 @@ function install_hyprland() {
 	meson setup --reconfigure --prefix=/usr/local build -Dbuildtype=debug
 	ninja -C build
 	sudo ninja -C build install --quiet
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
 }
 
 # SWAY IDLE
@@ -173,6 +176,7 @@ function install_xdg_portal() {
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
 	sudo cmake --install build
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
 }
 
 # NWG LOOK
