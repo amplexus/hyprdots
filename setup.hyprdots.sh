@@ -281,32 +281,32 @@ set -e # exit on error
 
 mkdir -p ~/Work # We will checkout source code for various projects here
 
-# install_packages
-# install_go # Ubuntu version is too old for nwg-look
-# install_rust
-# install_catch2
+install_packages
+install_go # Ubuntu version is too old for nwg-look
+install_rust
+install_catch2
 
-# install_libdrm
-# install_libxcberrors
-# install_swaylock
-# install_swww
-# install_pywal
-# install_wayland_protocols # need newer version not available in apt
-# install_wayland_utils     # keep in sync with wayland-protocols
-# install_hyprutils
-# install_hyprlang
-# install_hyprcursor
-# install_swayidle
+install_libdrm
+install_libxcberrors
+install_swaylock
+install_swww
+install_pywal
+install_wayland_protocols # need newer version not available in apt
+install_wayland_utils     # keep in sync with wayland-protocols
+install_hyprutils
+install_hyprlang
+install_hyprcursor
+install_swayidle
 
 # install_wlogout # FIXME!
 
-# install_waybar
-# install_swaync
-# install_nwglook # nwg needs go 1.22... and takes a long time to build...
-# install_wpgtk
-# install_epoll_shim # NOT NEEDED AT ALL EVER
-# install_hypr_scanner
-# install_hyprland_protocols
+install_waybar
+install_swaync
+install_nwglook # nwg needs go 1.22... and takes a long time to build...
+install_wpgtk
+install_epoll_shim # NOT NEEDED AT ALL EVER
+install_hypr_scanner
+install_hyprland_protocols
 install_hyprland
 # install_yt_music
 
