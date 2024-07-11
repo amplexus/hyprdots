@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -d ~/.venv ] || python3 -m venv ~/.venv
+[ -d ~/.venv ] || python3 -m venv ~/.venv && ~/.venv/bin/python3 -m ensurepip --default-pip
 
 export PATH=$PATH:~/.local/bin:~/.cargo/bin:~/.venv/bin
 
@@ -12,7 +12,9 @@ function install_packages() {
 	sudo apt install qttools5-dev-tools libsdbus-c++-dev git curl slurp grim lxappearance pulseaudio-utils udiskie wl-clipboard \
 		clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev nodejs stow \
 		libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev ninja-build meson \
-		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev liblz4-dev
+		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev liblz4-dev \
+		libzip-dev librsvg2-dev librust-epoll-dev libpugixml-dev libxcb-util-dev libxcb-util0-dev libfftw3-dev xutils-dev xcb-proto
+	sudo apt remove catch2
 }
 function install_pnpm() {
 	which pnpm || curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -32,7 +34,8 @@ function install_catch2() {
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
-	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
+	sudo cp src/catch2/internal/catch_config_prefix_messages.hpp /usr/local/include/catch2/internal/
 }
 
 # SWAYLOCK WITH EFFECTS
@@ -59,8 +62,8 @@ function install_swww() {
 
 # INSTALL GO
 function install_go() {
-	curl https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
-	sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+	curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz --output /tmp/go1.22.2.linux-amd64.tar.gz
+	sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go1.22.2.linux-amd64.tar.gz
 	export PATH=/usr/local/go/bin:$PATH
 }
 
@@ -75,6 +78,20 @@ function install_pywal() {
 	~/.venv/bin/pip3 install .
 }
 
+
+function install_libxcberrors() {
+	[ -d ~/Work/libxcb-errors ] || git clone https://gitlab.freedesktop.org/xorg/lib/libxcb-errors.git ~/Work/libxcb-errors
+	cd ~/Work/libxcb-errors || exit 2
+	git submodule update --init    
+	git pull origin master --recurse-submodules
+	autoreconf --install
+	mkdir -p build
+	cd build
+	../configure
+	make
+	sudo make install
+}
+#
 # LIBDRM > 2.4.119
 function install_libdrm() {
 	[ -d ~/Work/drm ] || git clone https://gitlab.freedesktop.org/mesa/drm.git ~/Work/drm
@@ -88,12 +105,23 @@ function install_libdrm() {
 # HYPRLANG
 function install_hyprlang() {
 	[ -d ~/Work/hyprlang ] || git clone --recursive https://github.com/hyprwm/hyprlang ~/Work/hyprlang
-	cd ~/Work/hyprlang/ || exit 2
+	cd ~/Work/hyprlang/ 
 	git pull origin main --recurse-submodules
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
 	sudo cmake --install build
-	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build  # for neovim 
+}
+
+# HYPRCURSOR
+function install_hyprcursor() {
+	[ -d ~/Work/hyprcursor ] || git clone --recursive https://github.com/hyprwm/hyprcursor ~/Work/hyprcursor
+	cd ~/Work/hyprcursor/ || exit 2
+	git pull origin main --recurse-submodules
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
+	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
+	sudo cmake --install build
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
 # WAYLAND UTILS
@@ -116,6 +144,26 @@ function install_wayland_protocols() {
 	ninja -C build install --quiet
 }
 
+# HYPERLAND  UTILS
+function install_hyprutils() {
+	[ -d ~/Work/hyprutils ] || git clone https://github.com/hyprwm/hyprutils.git ~/Work/hyprutils
+	cd ~/Work/hyprutils || exit 2
+	git pull origin main --recurse-submodules
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
+	sudo cmake --install build
+}
+
+# HYPRLAND PROTOCOLS
+function install_hyprland_protocols() {
+	[ -d ~/Work/hyprland-protocols ] || git clone https://github.com/hyprwm/hyprland-protocols.git ~/Work/hyprland-protocols
+	cd ~/Work/hyprland-protocols || exit 2
+	git pull origin main --recurse-submodules
+	meson setup --reconfigure --prefix=/usr/local build
+	ninja -C build
+	ninja -C build install --quiet
+}
+
 # HYPRLAND
 function install_hyprland() {
 	[ -d ~/Work/hyprland ] || git clone https://github.com/hyprwm/Hyprland --recurse-submodules ~/Work/hyprland/
@@ -124,7 +172,7 @@ function install_hyprland() {
 	meson setup --reconfigure --prefix=/usr/local build -Dbuildtype=debug
 	ninja -C build
 	sudo ninja -C build install --quiet
-	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
 # SWAY IDLE
@@ -176,7 +224,7 @@ function install_xdg_portal() {
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
 	sudo cmake --install build
-	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 # for neovim
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
 # NWG LOOK
@@ -196,6 +244,29 @@ function install_wpgtk() {
 	~/.venv/lib/python3.11/site-packages/wpgtk/misc/wpg-install.sh -gi
 }
 
+# hyprwayland_scanner
+function install_hypr_scanner() {
+	[ -d ~/Work/hyprwayland-scanner ] || git clone https://github.com/hyprwm/hyprwayland-scanner ~/Work/hyprwayland-scanner
+	cd ~/Work/hyprwayland-scanner || exit 2
+	git pull origin main --recurse-submodules
+	cmake -DCMAKE_INSTALL_PREFIX=/usr/local -B build
+  cmake --build ./build -j `nproc`
+  sudo cmake --install ./build
+}
+
+# EPOLL SHIM
+function install_epoll_shim() {
+	[ -d ~/Work/epoll-shim ] || git clone https://github.com/jiixyj/epoll-shim ~/Work/epoll-shim
+	cd ~/Work/epoll-shim || exit 2
+	rm -rf build
+	mkdir build
+	cd build/
+	git pull origin master --recurse-submodules
+	cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  cmake --build .
+  cmake --build . --target install
+}
+
 # YOUTUBE MUSIC
 function install_yt_music() {
 	[ -d ~/Work/youtube-music ] || git clone https://github.com/th-ch/youtube-music ~/Work/youtube-music
@@ -210,25 +281,34 @@ set -e # exit on error
 
 mkdir -p ~/Work # We will checkout source code for various projects here
 
-install_packages
-install_go # Ubuntu version is too old for nwg-look
-install_rust
-install_catch2
-install_libdrm
-install_swaylock
-install_swww
-install_pywal
-install_wayland_protocols # need newer version not available in apt
-install_wayland_utils     # keep in sync with wayland-protocols
-install_hyprlang
+# install_packages
+# install_go # Ubuntu version is too old for nwg-look
+# install_rust
+# install_catch2
+
+# install_libdrm
+# install_libxcberrors
+# install_swaylock
+# install_swww
+# install_pywal
+# install_wayland_protocols # need newer version not available in apt
+# install_wayland_utils     # keep in sync with wayland-protocols
+# install_hyprutils
+# install_hyprlang
+# install_hyprcursor
+# install_swayidle
+
+# install_wlogout # FIXME!
+
+# install_waybar
+# install_swaync
+# install_nwglook # nwg needs go 1.22... and takes a long time to build...
+# install_wpgtk
+# install_epoll_shim # NOT NEEDED AT ALL EVER
+# install_hypr_scanner
+# install_hyprland_protocols
 install_hyprland
-install_swayidle
-install_wlogout
-install_waybar
-install_swaync
-install_nwglook # nwg needs go 1.22...
-install_wpgtk
-install_yt_music
+# install_yt_music
 
 echo
 echo "Four more important steps for you to do:"
