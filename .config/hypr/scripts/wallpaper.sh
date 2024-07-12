@@ -4,7 +4,7 @@ exec 2>&1 >~/.config/hypr/wallpaper.log
 
 rasi_file=~/.cache/current_wallpaper.rasi
 
-which wal || export PATH=$PATH:~/.venv/bin
+which wal || export PATH=~/.venv/bin:$PATH
 
 case $1 in
 
