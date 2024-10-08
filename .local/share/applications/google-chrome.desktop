@@ -4,6 +4,7 @@ Version=1.0
 Terminal=false
 Type=Application
 Name=Chrome
-Exec=/opt/google/chrome/google-chrome --profile-directory=Default --app-id=mejfjggmbnocnfibbibmoogocnjbcjnk --force-device-scale-factor=1
+# Exec=/opt/google/chrome/google-chrome --profile-directory=Default --app-id=mejfjggmbnocnfibbibmoogocnjbcjnk #--force-device-scale-factor=1 --new-window %U
+Exec=/usr/bin/google-chrome-stable --profile-directory=Default --app-id=mejfjggmbnocnfibbibmoogocnjbcjnk %U
 Icon=google-chrome
 StartupWMClass=crx_mejfjggmbnocnfibbibmoogocnjbcjnk

@@ -22,9 +22,13 @@ sleep 1
 # -----------------------------------------------------
 themestyle="/ml4w;/ml4w/light"
 
+# For legacy waybar...
+[ -d /tmp/hypr ] || ln -s $XDG_RUNTIME_DIR/hypr /tmp/hypr
+
 # -----------------------------------------------------
 # Get current theme information from .cache/.themestyle.sh
 # -----------------------------------------------------
+
 if [ -f ~/.cache/.themestyle.sh ]; then
 	themestyle=$(cat ~/.cache/.themestyle.sh)
 else
