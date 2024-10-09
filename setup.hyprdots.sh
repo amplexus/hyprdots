@@ -302,7 +302,7 @@ install_rust
 install_catch2
 #
 install_libdrm
-## install_libxcberrors
+## install_libxcberrors # not needed
 install_swaylock
 install_swww
 install_pywal
@@ -313,20 +313,18 @@ install_hyprutils
 install_hyprlang
 install_hyprcursor
 install_swayidle
-#install_wlogout # FIXME!
-#
+# #install_wlogout # FIXME!
 install_waybar
+install_hypr_scanner
 install_xdg_portal
 install_swaync
-install_nwglook # nwg needs go 1.22... and takes a long time to build...
+install_nwglook
 install_wpgtk
 
-## install_epoll_shim # NOT NEEDED AT ALL EVER
-install_hypr_scanner
 install_hyprland_protocols
-install_aquamarine # needs libinput:1.26-dev but only 1.25 is available...
+install_aquamarine
 install_hyprland
-# install_yt_music
+# install_yt_music # optional...
 
 echo
 echo "Four more important steps for you to do:"
@@ -334,3 +332,7 @@ echo "1. run nwg-look and select FlatColor theme and icons"
 echo "2. enable the rice by running 'stow' - e.g. 'cd $BASEDIR && stow --target=~/ hyprdots'"
 echo "3. if you DO NOT have a 4k monitor, edit ~/.config/hypr/hyprland.conf file and modify the monitor line to change ',highres,auto,2' to ',highres,auto,1' because you probably don't want to scale to double size like me - otherwise everything will be scaled to double size"
 echo "4. logout and log back in, but make sure you choose the hyprland window manager in the sddm login screen"
+echo "5. If you find hyprland isn't starting up it could be because of max open files errors, so you might want to set the following in /etc/sysctl.conf:"
+echo "   fs.inotify.max_user_instances=512"
+echo "   fs.inotify.max_user_watches=256000"
+
