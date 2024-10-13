@@ -58,6 +58,7 @@ function install_swww() {
 	[ -d $BASEDIR/swww ] || git clone https://github.com/LGFae/swww $BASEDIR/swww
 	cd $BASEDIR/swww || exit 2
 	git pull origin main --recurse-submodules
+	git checkout tags/v0.9.4 # 0.9.5 and HEAD don't work
 	cargo build --release
 	[ -f /usr/local/bin/swww-daemon ] && sudo mv /usr/local/bin/swww-daemon /usr/local/bin/swww-daemon.old
 	sudo cp target/release/swww-daemon /usr/local/bin/
@@ -335,4 +336,3 @@ echo "4. logout and log back in, but make sure you choose the hyprland window ma
 echo "5. If you find hyprland isn't starting up it could be because of max open files errors, so you might want to set the following in /etc/sysctl.conf:"
 echo "   fs.inotify.max_user_instances=512"
 echo "   fs.inotify.max_user_watches=256000"
-
