@@ -16,7 +16,8 @@ function install_packages() {
 		libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev libpulse-dev libsigc++-2.0-dev ninja-build meson \
 		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev liblz4-dev \
 		libzip-dev librsvg2-dev librust-epoll-dev libpugixml-dev libxcb-util-dev libxcb-util0-dev libfftw3-dev xutils-dev xcb-proto libspdlog-dev \
-		qt6-wayland-dev qt6-wayland-dev-tools qt6-tools-dev qt6-base-dev
+		qt6-wayland-dev qt6-wayland-dev-tools qt6-tools-dev qt6-base-dev cmake libtomlplusplus-dev libiniparser-dev libpipewire-0.3-dev libgbm-dev libspa-0.2-dev \
+		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev
 
 	sudo apt remove catch2
 }
@@ -247,7 +248,7 @@ function install_wpgtk() {
 	cd $BASEDIR/wpgtk || exit 2
 	git pull origin master --recurse-submodules
 	~/.venv/bin/pip3 install .
-	~/.venv/lib/python3.11/site-packages/wpgtk/misc/wpg-install.sh -gi
+	~/.venv/lib/python3.12/site-packages/wpgtk/misc/wpg-install.sh -gi
 }
 
 # hyprwayland_scanner
@@ -301,9 +302,7 @@ install_packages
 install_go # Ubuntu version is too old for nwg-look
 install_rust
 install_catch2
-#
 install_libdrm
-## install_libxcberrors # not needed
 install_swaylock
 install_swww
 install_pywal
@@ -314,7 +313,7 @@ install_hyprutils
 install_hyprlang
 install_hyprcursor
 install_swayidle
-# #install_wlogout # FIXME!
+#install_wlogout # FIXME!
 install_waybar
 install_hypr_scanner
 install_xdg_portal
