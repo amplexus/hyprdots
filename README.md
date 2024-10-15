@@ -33,6 +33,8 @@ Now `stow` the files:
 
 ```
 git clone https://github.com/amplexus/hyprdots.git ~/hyprdots
+cd ~/hyprdots
+./setup.hyprdots.sh
 cd ~/
 stow --target=~/ hyprdots
 ```
