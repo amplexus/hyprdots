@@ -35,6 +35,7 @@ function install_catch2() {
 	[ -d $BASEDIR/Catch2 ] || git clone https://github.com/catchorg/Catch2 --recurse-submodules $BASEDIR/Catch2
 	cd $BASEDIR/Catch2 || exit 2
 	git pull origin devel --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -47,6 +48,7 @@ function install_swaylock() {
 	[ -d $BASEDIR/swaylock-effects ] || git clone https://github.com/jirutka/swaylock-effects --recurse-submodules $BASEDIR/swaylock-effects/
 	cd $BASEDIR/swaylock-effects || exit 2
 	git pull origin master --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -101,6 +103,7 @@ function install_libdrm() {
 	[ -d $BASEDIR/drm ] || git clone https://gitlab.freedesktop.org/mesa/drm.git $BASEDIR/drm
 	cd $BASEDIR/drm || exit 2
 	git pull origin main --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -110,6 +113,7 @@ function install_libdrm() {
 function install_hyprlang() {
 	[ -d $BASEDIR/hyprlang ] || git clone --recursive https://github.com/hyprwm/hyprlang $BASEDIR/hyprlang
 	cd $BASEDIR/hyprlang/
+	rm -rf ./build
 	git pull origin main --recurse-submodules
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
@@ -122,6 +126,7 @@ function install_hyprcursor() {
 	[ -d $BASEDIR/hyprcursor ] || git clone --recursive https://github.com/hyprwm/hyprcursor $BASEDIR/hyprcursor
 	cd $BASEDIR/hyprcursor/ || exit 2
 	git pull origin main --recurse-submodules
+	rm -rf ./build
 	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
 	cmake --build ./build --config Release --target all -j$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)
 	sudo cmake --install build
@@ -132,28 +137,31 @@ function install_hyprcursor() {
 function install_wayland_utils() {
 	[ -d $BASEDIR/wayland-utils ] || git clone https://gitlab.freedesktop.org/wayland/wayland-utils.git $BASEDIR/wayland-utils
 	cd $BASEDIR/wayland-utils || exit 2
-	git pull origin main --recurse-submodules
+	git pull origin master --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
 }
 
 # WAYLAND PROTOCOLS
-function install_wayland_protocols() {
-	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
-	cd $BASEDIR/wayland-protocols || exit 2
-	git pull origin main --recurse-submodules
-	meson setup --reconfigure --prefix=/usr/local build
-	ninja -C build
-	ninja -C build install --quiet
-}
+# function install_wayland_protocols() {
+# 	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
+# 	cd $BASEDIR/wayland-protocols || exit 2
+# 	git pull origin master --recurse-submodules
+# 	rm -rf ./build
+# 	meson setup --reconfigure --prefix=/usr/local build
+# 	ninja -C build
+# 	ninja -C build install --quiet
+# }
 
 # HYPERLAND  UTILS
 function install_hyprutils() {
 	[ -d $BASEDIR/hyprutils ] || git clone https://github.com/hyprwm/hyprutils.git $BASEDIR/hyprutils
 	cd $BASEDIR/hyprutils || exit 2
 	git pull origin main --recurse-submodules
-	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+	rm -rf ./build
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
 	cmake --build ./build --config Release --target all -j$(nproc 2>/dev/null || getconf _NPROCESSORS_CONF)
 	sudo cmake --install build
 }
@@ -162,7 +170,9 @@ function install_hyprutils() {
 function install_hyprland_protocols() {
 	[ -d $BASEDIR/hyprland-protocols ] || git clone https://github.com/hyprwm/hyprland-protocols.git $BASEDIR/hyprland-protocols
 	cd $BASEDIR/hyprland-protocols || exit 2
+	rm -rf ./build
 	git pull origin main --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -173,6 +183,7 @@ function install_hyprland() {
 	[ -d $BASEDIR/hyprland ] || git clone https://github.com/hyprwm/Hyprland --recurse-submodules $BASEDIR/hyprland/
 	cd $BASEDIR/hyprland || exit 2
 	git pull origin main --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build -Dbuildtype=debug
 	ninja -C build
 	sudo ninja -C build install --quiet
@@ -184,6 +195,7 @@ function install_swayidle() {
 	[ -d $BASEDIR/swayidle ] || git clone https://github.com/swaywm/swayidle $BASEDIR/swayidle
 	cd $BASEDIR/swayidle || exit 2
 	git pull origin master --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -195,6 +207,7 @@ function install_wlogout() {
 	cd $BASEDIR/wlogout || exit 2
 	git pull origin master --recurse-submodules
 	git checkout . # for some reason the build modifies version managed files...
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -205,6 +218,7 @@ function install_waybar() {
 	[ -d $BASEDIR/Waybar ] || git clone https://github.com/Alexays/Waybar $BASEDIR/Waybar
 	cd $BASEDIR/Waybar || exit 2
 	git pull origin master --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -216,6 +230,7 @@ function install_swaync() {
 	[ -d $BASEDIR/SwayNotificationCenter ] || git clone https://github.com/ErikReider/SwayNotificationCenter $BASEDIR/SwayNotificationCenter
 	cd $BASEDIR/SwayNotificationCenter || exit 2
 	git pull origin main --recurse-submodules
+	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
 	ninja -C build install --quiet
@@ -226,6 +241,7 @@ function install_xdg_portal() {
 	export QT_DIR=/usr/lib/qt6
 	[ -d $BASEDIR/xdg-desktop-portal-hyprland ] || git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland $BASEDIR/xdg-desktop-portal-hyprland
 	cd $BASEDIR/xdg-desktop-portal-hyprland/ || exit 2
+	rm -rf ./build
 	git pull origin master --recurse-submodules
 	cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/local/lib -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build build
@@ -254,6 +270,7 @@ function install_wpgtk() {
 function install_hypr_scanner() {
 	[ -d $BASEDIR/hyprwayland-scanner ] || git clone https://github.com/hyprwm/hyprwayland-scanner $BASEDIR/hyprwayland-scanner
 	cd $BASEDIR/hyprwayland-scanner || exit 2
+	rm -rf ./build
 	git pull origin main --recurse-submodules
 	cmake -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build ./build -j $(nproc)
@@ -264,6 +281,7 @@ function install_hypr_scanner() {
 function install_aquamarine() {
 	[ -d $BASEDIR/aquamarine ] || git clone https://github.com/hyprwm/aquamarine $BASEDIR/aquamarine
 	cd $BASEDIR/aquamarine || exit 2
+	rm -rf ./build
 	git pull origin main --recurse-submodules
 	cmake -DCMAKE_INSTALL_PREFIX=/usr/local -B build
 	cmake --build ./build -j $(nproc)
@@ -301,27 +319,24 @@ install_packages
 install_go # Ubuntu version is too old for nwg-look
 install_rust
 install_catch2
-#
 install_libdrm
-## install_libxcberrors # not needed
+# install_libxcberrors # not needed
 install_swaylock
 install_swww
 install_pywal
-
-install_wayland_protocols # need newer version not available in apt
-install_wayland_utils     # keep in sync with wayland-protocols
+install_hypr_scanner
+# install_wayland_protocols # Ubuntu 24.10 version is adequate
+install_wayland_utils # keep in sync with wayland-protocols
 install_hyprutils
 install_hyprlang
 install_hyprcursor
 install_swayidle
-# #install_wlogout # FIXME!
+# install_wlogout # FIXME!
 install_waybar
-install_hypr_scanner
 install_xdg_portal
 install_swaync
 install_nwglook
 install_wpgtk
-
 install_hyprland_protocols
 install_aquamarine
 install_hyprland
