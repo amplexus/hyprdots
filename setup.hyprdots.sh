@@ -204,7 +204,8 @@ function install_swayidle() {
 
 # WLOGOUT
 function install_wlogout() {
-	[ -d $BASEDIR/wlogout ] || git clone https://github.com/swaywm/wlogout $BASEDIR/wlogout
+	# [ -d $BASEDIR/wlogout ] || git clone https://github.com/swaywm/wlogout $BASEDIR/wlogout
+	[ -d $BASEDIR/wlogout ] || git clone https://github.com/ArtsyMacaw/wlogout $BASEDIR/wlogout
 	cd $BASEDIR/wlogout || exit 2
 	git pull origin master --recurse-submodules
 	git checkout . # for some reason the build modifies version managed files...
@@ -278,6 +279,17 @@ function install_hypr_scanner() {
 	sudo cmake --install ./build
 }
 
+function install_hyprgraphics() {
+	[ -d $BASEDIR/hyprgraphics ] || git clone https://github.com/hyprwm/hyprgraphics $BASEDIR/hyprgraphics
+	cd $BASEDIR/hyprgraphics || exit 2
+	rm -rf ./build
+	git pull origin main --recurse-submodules
+
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
+	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
+	sudo cmake --install build
+}
+
 # aquamarine
 function install_aquamarine() {
 	[ -d $BASEDIR/aquamarine ] || git clone https://github.com/hyprwm/aquamarine $BASEDIR/aquamarine
@@ -321,27 +333,28 @@ install_go # Ubuntu version is too old for nwg-look
 install_rust
 install_catch2
 install_libdrm
-# install_libxcberrors # not needed
+install_libxcberrors # not needed
 install_swaylock
 install_swww
 install_pywal
 install_hypr_scanner
-# install_wayland_protocols # Ubuntu 24.10 version is adequate
+install_wayland_protocols # Ubuntu 24.10 version is adequate
 install_wayland_utils # keep in sync with wayland-protocols
 install_hyprutils
 install_hyprlang
 install_hyprcursor
 install_swayidle
-# install_wlogout # FIXME!
+install_wlogout
 install_waybar
 install_xdg_portal
 install_swaync
 install_nwglook
 install_wpgtk
 install_hyprland_protocols
+install_hyprgraphics
 install_aquamarine
 install_hyprland
-# install_yt_music # optional...
+# # install_yt_music # optional...
 
 echo
 echo "Four more important steps for you to do:"
