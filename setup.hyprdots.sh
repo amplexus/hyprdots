@@ -134,6 +134,17 @@ function install_hyprcursor() {
 	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
+function install_hyprqtutils() {
+	[ -d $BASEDIR/hyprqtutils ] || git clone --recursive https://github.com/hyprwm/hyprcursor $BASEDIR/hyprqtutils
+	cd $BASEDIR/hyprcursor/ || exit 2
+	git pull origin main --recurse-submodules
+	rm -rf ./build
+	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
+	cmake --build ./build --config Release --target all -j$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)
+	sudo cmake --install build
+	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
+}
+
 # WAYLAND UTILS
 function install_wayland_utils() {
 	[ -d $BASEDIR/wayland-utils ] || git clone https://gitlab.freedesktop.org/wayland/wayland-utils.git $BASEDIR/wayland-utils
@@ -343,6 +354,7 @@ install_wayland_utils # keep in sync with wayland-protocols
 install_hyprutils
 install_hyprlang
 install_hyprcursor
+install_hyprqtutils
 install_swayidle
 install_wlogout
 install_waybar
