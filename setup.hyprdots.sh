@@ -17,7 +17,9 @@ function install_packages() {
 		libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev valac sassc libjson-glib-dev libhandy-1-dev libgranite-dev libnotify-bin libpciaccess-dev liblz4-dev \
 		libzip-dev librsvg2-dev librust-epoll-dev libpugixml-dev libxcb-util-dev libxcb-util0-dev libfftw3-dev xutils-dev xcb-proto libspdlog-dev \
 		qt6-wayland-dev qt6-wayland-dev-tools qt6-tools-dev qt6-base-dev cmake libtomlplusplus-dev libiniparser-dev libpipewire-0.3-dev libgbm-dev libspa-0.2-dev \
-		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev
+		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev libre2-dev
+		qt6-quick3d-dev qt6-quick3dphysics-dev qt6-quicktimeline-dev libqt63dquick6 qt6-declarative-dev qt6-declarative-private-dev  libqca-qt6-dev \
+		libqaccessibilityclient-qt6-dev  qt6-base-private-dev  qt6-tools-private-dev qt6-wayland-private-dev
 
 	sudo apt remove catch2
 }
@@ -129,20 +131,19 @@ function install_hyprcursor() {
 	git pull origin main --recurse-submodules
 	rm -rf ./build
 	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
-	cmake --build ./build --config Release --target all -j$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)
+	cmake --build ./build --config Release --target all -j"$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)"
 	sudo cmake --install build
 	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
 function install_hyprqtutils() {
-	[ -d $BASEDIR/hyprqtutils ] || git clone --recursive https://github.com/hyprwm/hyprcursor $BASEDIR/hyprqtutils
-	cd $BASEDIR/hyprcursor/ || exit 2
+	[ -d $BASEDIR/hyprqtutils ] || git clone --recursive https://github.com/hyprwm/hyprland-qtutils $BASEDIR/hyprqtutils
+	cd $BASEDIR/hyprqtutils/ || exit 2
 	git pull origin main --recurse-submodules
 	rm -rf ./build
 	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local -S . -B ./build
-	cmake --build ./build --config Release --target all -j$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)
+	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
 	sudo cmake --install build
-	cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build # for neovim
 }
 
 # WAYLAND UTILS
@@ -157,15 +158,15 @@ function install_wayland_utils() {
 }
 
 # WAYLAND PROTOCOLS
-# function install_wayland_protocols() {
-# 	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
-# 	cd $BASEDIR/wayland-protocols || exit 2
-# 	git pull origin master --recurse-submodules
-# 	rm -rf ./build
-# 	meson setup --reconfigure --prefix=/usr/local build
-# 	ninja -C build
-# 	ninja -C build install --quiet
-# }
+function install_wayland_protocols() {
+	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
+	cd $BASEDIR/wayland-protocols || exit 2
+	git pull origin master --recurse-submodules
+	rm -rf ./build
+	meson setup --reconfigure --prefix=/usr/local build
+	ninja -C build
+	ninja -C build install --quiet
+}
 
 # HYPERLAND  UTILS
 function install_hyprutils() {
@@ -312,6 +313,16 @@ function install_aquamarine() {
 	sudo cmake --install ./build
 }
 
+function install_glaze() {
+	[ -d $BASEDIR/glaze ] || git clone https://github.com/stephenberry/glaze $BASEDIR/glaze
+	cd $BASEDIR/glaze || exit 2
+	rm -rf ./build
+	git pull origin main --recurse-submodules
+	cmake -DCMAKE_INSTALL_PREFIX=/usr/local -B build
+	cmake --build ./build -j $(nproc)
+	sudo cmake --install ./build
+}
+
 # EPOLL SHIM
 function install_epoll_shim() {
 	[ -d $BASEDIR/epoll-shim ] || git clone https://github.com/jiixyj/epoll-shim $BASEDIR/epoll-shim
@@ -339,33 +350,37 @@ set -e # exit on error
 
 mkdir -p $BASEDIR # We will checkout source code for various projects here
 
-install_packages
-install_go # Ubuntu version is too old for nwg-look
-install_rust
-install_catch2
-install_libdrm
-install_libxcberrors # not needed
-install_swaylock
-install_swww
-install_pywal
-install_hypr_scanner
-install_wayland_protocols # Ubuntu 24.10 version is adequate
-install_wayland_utils # keep in sync with wayland-protocols
-install_hyprutils
-install_hyprlang
-install_hyprcursor
+# install_packages
+# install_go # Ubuntu version is too old for nwg-look
+# install_rust
+
+# install_catch2
+# install_libdrm
+# install_libxcberrors # not needed
+# install_swaylock
+# install_swww
+# install_pywal
+# install_hypr_scanner
+
+# install_wayland_protocols # Ubuntu 24.10 version is adequate
+# install_wayland_utils # Ubuntu 24.10 version is adequate - must keep in sync with wayland-protocols
+
+# install_hyprutils
+# install_hyprlang
+# install_hyprcursor
 install_hyprqtutils
-install_swayidle
-install_wlogout
-install_waybar
-install_xdg_portal
-install_swaync
-install_nwglook
-install_wpgtk
-install_hyprland_protocols
-install_hyprgraphics
-install_aquamarine
-install_hyprland
+# install_swayidle
+# install_wlogout
+# install_waybar
+# install_xdg_portal
+# install_swaync
+# install_nwglook
+# install_wpgtk
+# install_hyprland_protocols
+# install_hyprgraphics
+# install_aquamarine
+# install_glaze
+# install_hyprland
 # # install_yt_music # optional...
 
 echo
