@@ -19,7 +19,8 @@ function install_packages() {
 		qt6-wayland-dev qt6-wayland-dev-tools qt6-tools-dev qt6-base-dev cmake libtomlplusplus-dev libiniparser-dev libpipewire-0.3-dev libgbm-dev libspa-0.2-dev \
 		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev libre2-dev
 		qt6-quick3d-dev qt6-quick3dphysics-dev qt6-quicktimeline-dev libqt63dquick6 qt6-declarative-dev qt6-declarative-private-dev  libqca-qt6-dev \
-		libqaccessibilityclient-qt6-dev  qt6-base-private-dev  qt6-tools-private-dev qt6-wayland-private-dev
+		libqaccessibilityclient-qt6-dev  qt6-base-private-dev  qt6-tools-private-dev qt6-wayland-private-dev \
+		libmagic-dev flex bison
 
 	sudo apt remove catch2
 }
@@ -227,6 +228,17 @@ function install_wlogout() {
 	ninja -C build install --quiet
 }
 
+# ROFI WAYLAND
+function install_rofi_wayland() {
+	[ -d $BASEDIR/rofi ] || git clone https://github.com/lbonn/rofi $BASEDIR/rofi
+	cd $BASEDIR/rofi || exit 2
+	git pull origin master --recurse-submodules
+	rm -rf ./build
+	meson setup --reconfigure --prefix=/usr/local -Dxcb=disabled build
+	ninja -C build
+	ninja -C build install --quiet
+}
+
 # WAYBAR
 function install_waybar() {
 	[ -d $BASEDIR/Waybar ] || git clone https://github.com/Alexays/Waybar $BASEDIR/Waybar
@@ -350,37 +362,40 @@ set -e # exit on error
 
 mkdir -p $BASEDIR # We will checkout source code for various projects here
 
-# install_packages
-# install_go # Ubuntu version is too old for nwg-look
-# install_rust
+install_packages
+install_go # Ubuntu version is too old for nwg-look
+install_rust
 
-# install_catch2
-# install_libdrm
-# install_libxcberrors # not needed
-# install_swaylock
-# install_swww
-# install_pywal
-# install_hypr_scanner
+install_catch2
+install_rofi_wayland
+install_libdrm
+install_libxcberrors # not needed
+install_swaylock
+install_swww
+install_pywal
+install_hypr_scanner
 
 # install_wayland_protocols # Ubuntu 24.10 version is adequate
 # install_wayland_utils # Ubuntu 24.10 version is adequate - must keep in sync with wayland-protocols
 
-# install_hyprutils
-# install_hyprlang
-# install_hyprcursor
+install_rofi_wayland
+install_hyprutils
+install_hyprlang
+install_hyprcursor
 install_hyprqtutils
-# install_swayidle
-# install_wlogout
-# install_waybar
-# install_xdg_portal
-# install_swaync
-# install_nwglook
-# install_wpgtk
-# install_hyprland_protocols
-# install_hyprgraphics
-# install_aquamarine
-# install_glaze
-# install_hyprland
+install_swayidle
+install_wlogout
+install_waybar
+install_xdg_portal
+install_swaync
+
+install_nwglook
+install_wpgtk
+install_hyprland_protocols
+install_hyprgraphics
+install_aquamarine
+install_glaze
+install_hyprland
 # # install_yt_music # optional...
 
 echo
