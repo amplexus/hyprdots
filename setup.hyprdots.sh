@@ -20,7 +20,7 @@ function install_packages() {
 		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev libre2-dev \
 		qt6-quick3d-dev qt6-quick3dphysics-dev qt6-quicktimeline-dev libqt63dquick6 qt6-declarative-dev qt6-declarative-private-dev  libqca-qt6-dev \
 		libqaccessibilityclient-qt6-dev  qt6-base-private-dev  qt6-tools-private-dev qt6-wayland-private-dev \
-		libmagic-dev flex bison foot
+		libmagic-dev flex bison foot libtracy-dev
 
 	sudo apt remove catch2
 }
@@ -162,7 +162,8 @@ function install_wayland_utils() {
 function install_wayland_protocols() {
 	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
 	cd $BASEDIR/wayland-protocols || exit 2
-	git pull origin master --recurse-submodules
+	git checkout main
+	git pull origin main --recurse-submodules
 	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
