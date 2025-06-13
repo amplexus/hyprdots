@@ -20,7 +20,7 @@ function install_packages() {
 		libseat-dev libdisplay-info-dev libxcb-errors-dev libxcb-icccm4-dev libxcb-res0-dev libxcb-xfixes0-dev libxcb-composite0-dev libre2-dev \
 		qt6-quick3d-dev qt6-quick3dphysics-dev qt6-quicktimeline-dev libqt63dquick6 qt6-declarative-dev qt6-declarative-private-dev  libqca-qt6-dev \
 		libqaccessibilityclient-qt6-dev  qt6-base-private-dev  qt6-tools-private-dev qt6-wayland-private-dev \
-		libmagic-dev flex bison foot libtracy-dev
+		libmagic-dev flex bison foot libtracy-dev libgtkmm-3.0-dev blueprint-compiler libgtk4-layer-shell-dev
 
 	sudo apt remove catch2
 }
@@ -66,6 +66,7 @@ function install_swww() {
 	git pull origin main --recurse-submodules
 	git checkout tags/v0.9.4 # 0.9.5 and HEAD don't work
 	cargo build --release
+	[ -f /usr/local/bin/swww ] && sudo mv /usr/local/bin/swww /usr/local/bin/swww.old
 	[ -f /usr/local/bin/swww-daemon ] && sudo mv /usr/local/bin/swww-daemon /usr/local/bin/swww-daemon.old
 	sudo cp target/release/swww-daemon /usr/local/bin/
 	sudo cp target/release/swww /usr/local/bin/
@@ -162,8 +163,8 @@ function install_wayland_utils() {
 function install_wayland_protocols() {
 	[ -d $BASEDIR/wayland-protocols ] || git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git $BASEDIR/wayland-protocols
 	cd $BASEDIR/wayland-protocols || exit 2
-	git checkout main
-	git pull origin main --recurse-submodules
+	git checkout master
+	git pull origin master --recurse-submodules
 	rm -rf ./build
 	meson setup --reconfigure --prefix=/usr/local build
 	ninja -C build
@@ -376,19 +377,20 @@ install_swww
 install_pywal
 install_hypr_scanner
 
-# install_wayland_protocols # Ubuntu 24.10 version is adequate
-# install_wayland_utils # Ubuntu 24.10 version is adequate - must keep in sync with wayland-protocols
+install_wayland_protocols # Ubuntu 24.10 version is no longer adequate
+install_wayland_utils # Ubuntu 24.10 version is no longer adequate - must keep in sync with wayland-protocols
 
 install_rofi_wayland
 install_hyprutils
 install_hyprlang
 install_hyprcursor
 install_hyprqtutils
-install_swayidle
-install_wlogout
-install_waybar
-install_xdg_portal
-install_swaync
+
+install_swayidle # deps problem
+install_wlogout # deps problem
+install_waybar # build errors on master now...
+install_xdg_portal # more build errors
+install_swaync # more deps errors
 
 install_nwglook
 install_wpgtk
@@ -397,7 +399,7 @@ install_hyprgraphics
 install_aquamarine
 install_glaze
 install_hyprland
-# # install_yt_music # optional...
+# install_yt_music # optional...
 
 echo
 echo "Four more important steps for you to do:"
